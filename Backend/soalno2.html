@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hitung Gaji Karyawan</title>
+</head>
+
+<body>
+    <h1>Hitung Gaji Karyawan</h1>
+    <form>
+        <label for="jamKerja">Jumlah Jam Kerja:</label>
+        <input type="number" id="jamKerja" required><br>
+        <label for="gajiJam">Tarif per Jam:</label>
+        <input type="number" id="gajiJam" required><br>
+        <button id="hitungGaji">Hitung Gaji</button>
+        <p id="tarifPerJam"></p>
+        <p id="gajiKaryawan"></p>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    const hitungGajiButton = document.getElementById('hitungGaji');
+    const jamKerjaInput = document.getElementById('jamKerja');
+    const gajiKerjaInput = document.getElementById('gajiJam');
+    const tarifPerJamElement = document.getElementById('tarifPerJam');
+    const gajiKaryawanElement = document.getElementById('gajiKaryawan');
+
+    hitungGajiButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const jamKerja = parseInt(jamKerjaInput.value);
+        const tarifPerJam = parseInt(gajiKerjaInput.value);
+        let gajiKaryawan;
+
+        if (jamKerja <= 40) {
+            gajiKaryawan = jamKerja * tarifPerJam;
+        } else {
+            const jamLembur = jamKerja - 40;
+            const gajiLembur = jamLembur * (tarifPerJam * 1.5);
+            gajiKaryawan = (40 * tarifPerJam) + gajiLembur;
+        }
+
+        tarifPerJamElement.textContent = `Tarif per jam: Rp ${tarifPerJam}`;
+        gajiKaryawanElement.textContent = `Gaji karyawan: Rp ${gajiKaryawan}`;
+    });
+</script>
+</html>
